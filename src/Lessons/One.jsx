@@ -1,17 +1,17 @@
 import React from "react";
-import { Grid } from "@mui/material";
-import { VocabGrid } from "./LessonComponents/VocabGrid";
 import { Example } from "./LessonComponents/Example";
 import { WordForWord } from "./LessonComponents/WordForWord";
-import { Vocab } from "../Vocab";
-import { Revealer } from "./LessonComponents/Revealer";
-import { MakeSentences } from "./LessonComponents/MakeSentences";
-import { FindMistake } from "./LessonComponents/FindMistake";
+import { Vocab } from "./LessonComponents/Vocab";
+import { Revealer } from "./TestComponents/Revealer";
+import { MakeSentences } from "./TestComponents/MakeSentences";
+import { FindMistake } from "./TestComponents/FindMistake";
+import { Dragger } from "./TestComponents/Dragger";
+import { TranslateOne } from "./TestComponents/TranslateOne";
 
 export const One = () => {
   return (
     <div>
-      <h2>Lesson One</h2>
+      <h2 className="header">Lesson One</h2>
 
       <p>
         Let’s start by learning four words. You can expand them using the button
@@ -143,44 +143,12 @@ export const One = () => {
       <h2>Vocab</h2>
       <Vocab Lesson={1} />
 
+      <br />
+      <br />
+      <br />
+      <h2 className="header">Test</h2>
       <MakeSentences
-        Length={4}
-        words={[
-          { word: "tha", pos: 0, length: 2},
-          { word: "chan", pos: 0 },
-          { word: "eil", pos: 1 },
-
-          { word: "mi", pos: 2 },
-          { word: "thu", pos: 2 },
-          { word: "sgìth", pos: 3 },
-          { word: "mòr", pos: 3 },
-        ]}
-      />
-
-      <MakeSentences
-        Length={4}
-        words={[
-          { word: "tha", pos: 0 },
-          { word: "tha", pos: 0 },
-          { word: "mi", pos: 1 },
-          { word: "thu", pos: 1 },
-          { word: "ag", pos: 2 },
-          { word: "a'", pos: 2 },
-          { word: "dol", pos: 3, prev: "a'" },
-          { word: "ithe", pos: 3, prev: "ag" },
-        ]}
-      />
-
-      <MakeSentences 
-        Length={2}
-        words={[
-          {word: 'a', pos: 0},
-          {word: 'nach', pos: 0},
-          {word: 'bheil', pos: 1, prev: 'a'},
-          {word: 'eil', pos: 1, prev: 'nach'},
-        ]} />
-
-      <MakeSentences
+        Blurb
         Length={3}
         words={[
           { word: "tha", pos: 0 },
@@ -201,18 +169,29 @@ export const One = () => {
         ]}
       />
 
+      <Dragger Blurb sentence="tha thu brònach" />
+      <Dragger sentence="tha thu mòr" />
+      <Dragger sentence="tha thu beag" />
+      <Dragger sentence="tha mi toilichte" />
+      <Dragger sentence="tha thu sgìth" />
+      <Dragger sentence="tha mi mòr" />
 
-      <FindMistake 
-        sentence={'tha  mi  sgith'}
-        mistake={'sgith'}
-        correct={'sgìth'}
+
+      <TranslateOne
+        Blurb
+        A={["You are happy", "You're happy"]}
+        Q={"Tha thu toilichte"}
       />
 
-  <FindMistake 
-        sentence={'tha  mi X dol'}
-        mistake={'X'}
-        correct={"a'"}
-      />
+      <TranslateOne A={["I am tired", "I'm tired"]} Q={"Tha mi sgìth"} />
+
+      <TranslateOne A={["You are big", "You're big"]} Q={"Tha thu mòr"} />
+
+      <TranslateOne A={["Tha mi beag"]} Q={"I am small"} />
+
+      <TranslateOne A={["Tha thu brònach"]} Q={"You are sad"} />
+
+      <TranslateOne A={["Tha thu sgìth"]} Q={"You are tired"} />
     </div>
   );
 };

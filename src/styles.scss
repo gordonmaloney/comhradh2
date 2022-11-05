@@ -1,0 +1,28 @@
+$green: #00842a;
+$blue1: #407a8c;
+$blue2: #d1f0d9;
+$white: #ece9e9;
+$black: #000f08;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.header {
+    background-color: $green;
+    color: white;
+    display: inline;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: 'Inter', sans-serif;
+}
+
+.vocabGrid {
+    border: 1px solid black;
+    width: 95% !important;
+    min-width: 300px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    border-radius: 10px;
+}

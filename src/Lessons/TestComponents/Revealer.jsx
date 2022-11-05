@@ -11,15 +11,21 @@ export const Revealer = ({ q, a }) => {
             display: "inline-block",
             padding: "5px 15px",
             border: "1px solid black",
+            borderRadius: "10px",
           }}
         >
           {q}
           <br />
           <br />
           <span
-            style={{backgroundColor: reveal ? '' : 'black'}}
-            onClick={() => setReveal(prev => !prev)}
-            >
+            style={{
+              backgroundColor: reveal ? "" : "#00842a",
+              color: reveal ? "black" : "#00842a",
+              padding: '2px',
+              borderRadius: '5px',
+            }}
+            onClick={() => setReveal((prev) => !prev)}
+          >
             <b>{a}</b>
           </span>
         </div>

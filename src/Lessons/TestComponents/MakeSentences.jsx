@@ -19,7 +19,7 @@ function shuffleArray(array) {
   }
 }
 
-export const MakeSentences = ({ words, Length }) => {
+export const MakeSentences = ({ words, Length, Blurb }) => {
   const [options, setOptions] = useState([]);
   useEffect(() => {
     setOptions(
@@ -39,8 +39,6 @@ export const MakeSentences = ({ words, Length }) => {
 
   const [sentence, setSentence] = useState([]);
   const [finishedSentences, setFinishedSentences] = useState([]);
-
-
 
   if (sentence.length == Length) {
     //check positions
@@ -81,22 +79,38 @@ export const MakeSentences = ({ words, Length }) => {
 
   return (
     <div>
-      <h3>Make Sentences</h3>
-      {options.length > 0 && (
+      {Blurb && (
+        <>
+          <h3>Make Sentences</h3>
+          <p>
+            Try to make sentences using the words in the box - click one to
+            start:
+          </p>
+        </>
+      )}
+      {(options.length > 0 || sentence.length > 0) && (
         <div
           style={{
             border: "1px solid black",
             width: "400px",
-            maxWidth: '95%',
+            maxWidth: "95%",
             margin: "0 auto 5px auto",
-            padding: '10px',
-            borderRadius: '10px 5px'
+            padding: "10px",
+            borderRadius: "10px 5px",
+            minHeight: "50px",
           }}
         >
           <center>
             {options.map((word, index) => (
               <Chip
                 key={index}
+                sx={{
+                  backgroundColor: "#d1f0d9",
+                  "&:hover": {
+                    color: "white",
+                    backgroundColor: "#407a8c",
+                  },
+                }}
                 onClick={() => {
                   setSentence((prev) =>
                     word?.length > 1
@@ -115,44 +129,57 @@ export const MakeSentences = ({ words, Length }) => {
         </div>
       )}
 
-      <center>
-        <div
-          style={{
-            borderBottom: "1px dashed black",
-            minHeight: "40px",
-            minWidth: "100px",
-            display: "inline-block",
-          }}
-        >
-          {sentence.map(
-            (word) =>
-              word.word != "" && (
-                <Chip
-                  onClick={() => {
-                    setOptions([...options, word]);
-                    setSentence((prev) =>
-                      prev.filter((filterword) => filterword.key !== word.key)
-                    );
-                  }}
-                  style={{ margin: "0 2px -20px 2px" }}
-                  label={word.word}
-                />
-              )
-          )}
-        </div>
-        {sentence.length == Length && (
-          <>
-            <br />
-            <i>Hmm, this doesn't look right!</i>
-          </>
-        )}
-      </center>
+      {(options.length > 0 || sentence.length > 0) && (
+        <>
+          <center>
+            <div
+              style={{
+                borderBottom: "1px dashed black",
+                minHeight: "40px",
+                minWidth: "100px",
+                display: "inline-block",
+              }}
+            >
+              {sentence.map(
+                (word) =>
+                  word.word != "" && (
+                    <Chip
+                      onClick={() => {
+                        setOptions([...options, word]);
+                        setSentence((prev) =>
+                          prev.filter(
+                            (filterword) => filterword.key !== word.key
+                          )
+                        );
+                      }}
+                      sx={{
+                        backgroundColor: "#d1f0d9",
+                        "&:hover": {
+                          color: "white",
+                          backgroundColor: "#407a8c",
+                        },
+                        margin: "0 2px -20px 2px",
+                      }}
+                      label={word.word}
+                    />
+                  )
+              )}
+            </div>
+            {sentence.length > Length - 1 && (
+              <>
+                <br />
+                <i>Hmm, this doesn't look right!</i>
+              </>
+            )}
+          </center>
+        </>
+      )}
 
       <ul>
         {finishedSentences.map((sentence) => (
           <li>
             <Chip
-              style={{ backgroundColor: "lightgreen", margin: "5px 0" }}
+              style={{ backgroundColor: "#d1f0d9", margin: "5px 0" }}
               label={sentence}
             />{" "}
             👍
