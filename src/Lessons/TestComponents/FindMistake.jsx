@@ -1,16 +1,26 @@
 import React, { useState } from "react";
 import { Button, Chip, TextField } from "@mui/material";
 import SelectInput from "@mui/material/Select/SelectInput";
-import { cleanText } from "./CleanText";
+import { AnswerBtn, cleanText, SubmitBtn } from "./Common";
+
+import { useEffect } from "react";
 //Blurb for explainer and header
 //sentences REQUIRE DOUBLE SPACES
 //use X for missing words
 
-export const FindMistake = ({ Blurb, sentence, mistake, correct }) => {
+export const FindMistake = ({ header, sentence, mistake, correct }) => {
   const [typing, setTyping] = useState(false);
   const [Input, setInput] = useState("");
 
   const [Correct, setCorrect] = useState(false);
+  const [showAnswer, setShowAnswer] = useState(false);
+
+  useEffect(() => {
+    setCorrect(false);
+    setShowAnswer(false);
+    setTyping(false);
+    setInput("");
+  }, [sentence]);
 
   const correctSentence = sentence
     .split(" ")
@@ -26,16 +36,24 @@ export const FindMistake = ({ Blurb, sentence, mistake, correct }) => {
 
   return (
     <div>
-      {Blurb && (
-        <>
+      {header == "default" ? (
+        <div style={{ textAlign: "left" }}>
           <h3>Find the mistake</h3>
-          <p>Click the word that is wrong, or the space where a word is missing, and then type in the correct or missing word.</p>
+          <p>
+            Click the word that is wrong, or the space where a word is missing,
+            and then type in the correct or missing word.
+          </p>
+        </div>
+      ) : (
+        <>
+          {header}
+          <br />
         </>
       )}
 
       {!Correct ? (
         <>
-          {sentence.split(" ").map((word) => (
+          {sentence.split(" ").map((word, index) => (
             <Chip
               style={{
                 backgroundColor: typing && word == mistake && "red",
@@ -69,7 +87,8 @@ export const FindMistake = ({ Blurb, sentence, mistake, correct }) => {
         <>
           <span style={{ textDecoration: "line-through" }}>
             {sentence.replace(/\X/g, "").replace(/\s+/g, " ")}
-          </span>{" "}
+          </span>
+          <br />
           <Chip
             label={correctSentence}
             style={{ backgroundColor: "lightgreen" }}
@@ -77,6 +96,12 @@ export const FindMistake = ({ Blurb, sentence, mistake, correct }) => {
           👍
         </>
       )}
+
+      <AnswerBtn variant="contained" onClick={() => setShowAnswer(!showAnswer)}>
+        {!showAnswer ? "Show" : "Hide"} Answer
+      </AnswerBtn>
+
+      {showAnswer && <div className="answerBox">{correctSentence}</div>}
     </div>
   );
 };

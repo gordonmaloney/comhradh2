@@ -1,25 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Chip } from "@mui/material";
-
+import { Chip, Button } from "@mui/material";
+import { shuffleArray, SubmitBtn } from "./Common";
+import { AnswerBtn } from "./Common";
 //sentence requires Length property, and words array
 //all words have a 'word' and a 'pos' property
 //can have optional 'length' property (chan eil vs tha)
 //optional 'prev' property, for word that must come before (ag vs a')
 
-function shuffleArray(array) {
-  for (var i = array.length - 1; i > 0; i--) {
-    // Generate random number
-    var j = Math.floor(Math.random() * (i + 1));
-
-    var temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-
-    return array;
-  }
-}
-
-export const MakeSentences = ({ words, Length, Blurb }) => {
+export const MakeSentences = ({ words, Length, header }) => {
   const [options, setOptions] = useState([]);
   useEffect(() => {
     setOptions(
@@ -29,7 +17,7 @@ export const MakeSentences = ({ words, Length, Blurb }) => {
             word: word.word,
             pos: word.pos,
             prev: word?.prev,
-            length: word?.length,
+            Length: word?.length,
             key: index,
           };
         })
@@ -39,6 +27,11 @@ export const MakeSentences = ({ words, Length, Blurb }) => {
 
   const [sentence, setSentence] = useState([]);
   const [finishedSentences, setFinishedSentences] = useState([]);
+
+  useEffect(() => {
+    setFinishedSentences([]);
+    setShowAnswer(false)
+  }, [words]);
 
   if (sentence.length == Length) {
     //check positions
@@ -77,15 +70,67 @@ export const MakeSentences = ({ words, Length, Blurb }) => {
     }
   }
 
+  const [showAnswer, setShowAnswer] = useState(false);
+
+  //generate possible solutions
+  const [possibleSolutions, setPossibleSolutions] = useState([]);
+  // clear possible solutions
+  useEffect(() => {
+    setPossibleSolutions([]);
+  }, [words]);
+
+  const [WordsToGo, setWordsToGo] = useState([]);
+  useEffect(() => {
+    setWordsToGo(words);
+  }, [options]);
+
+  useEffect(() => {
+    if (WordsToGo.length > 0) {
+      let NewSentence = [];
+
+      const AddWord = (index, pos) => {
+        if (WordsToGo[index].pos == pos) {
+          //add if no prev
+          !WordsToGo[index].prev && NewSentence.push(WordsToGo[index]);
+          //if prev, check it's right
+          WordsToGo[index].prev &&
+            NewSentence[pos - 1].word == WordsToGo[index].prev &&
+            NewSentence.push(WordsToGo[index]);
+          //add space for length
+          WordsToGo[index]?.length == 2 && NewSentence.push(" ");
+          NewSentence.length < Length && AddWord(index + 1, NewSentence.length);
+          NewSentence.length == Length &&
+            setPossibleSolutions((prev) => [
+              ...prev,
+              NewSentence.map((word) => word.word)
+                .join(" ")
+                .replace(/\s+/g, " "),
+            ]);
+        } else {
+          NewSentence.length < Length && AddWord(index + 1, pos);
+        }
+        setWordsToGo((prev) =>
+          prev.filter((word) => !NewSentence.includes(word))
+        );
+      };
+
+      AddWord(0, 0);
+    }
+  }, [WordsToGo]);
+
   return (
     <div>
-      {Blurb && (
-        <>
+      {header == "default" ? (
+        <div style={{ textAlign: "left" }}>
           <h3>Make Sentences</h3>
           <p>
             Try to make sentences using the words in the box - click one to
             start:
           </p>
+        </div>
+      ) : (
+        <>
+          {header} <br />
         </>
       )}
       {(options.length > 0 || sentence.length > 0) && (
@@ -113,7 +158,7 @@ export const MakeSentences = ({ words, Length, Blurb }) => {
                 }}
                 onClick={() => {
                   setSentence((prev) =>
-                    word?.length > 1
+                    word?.Length == 2
                       ? [...prev, word, { word: "", pos: word.pos + 1 }]
                       : [...prev, word]
                   );
@@ -175,17 +220,42 @@ export const MakeSentences = ({ words, Length, Blurb }) => {
         </>
       )}
 
-      <ul>
-        {finishedSentences.map((sentence) => (
-          <li>
-            <Chip
-              style={{ backgroundColor: "#d1f0d9", margin: "5px 0" }}
-              label={sentence}
-            />{" "}
-            👍
-          </li>
-        ))}
-      </ul>
+      <div
+        style={{
+          textAlign: "-webkit-left",
+        }}
+      >
+        <ul>
+          {finishedSentences.map((sentence) => (
+            <li>
+              <Chip
+                style={{ backgroundColor: "#d1f0d9", margin: "5px 0" }}
+                label={sentence}
+              />{" "}
+              👍
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <AnswerBtn variant="contained" onClick={() => setShowAnswer(!showAnswer)}>
+        {!showAnswer ? "Show" : "Hide"} Answer
+      </AnswerBtn>
+
+      {showAnswer && (
+        <div className="answerBox">
+          {" "}
+          <div style={{ textAlign: "-webkit-left" }}>
+            For these exercises, there are often multiple different solutions.
+            Here's just some:
+            <ul>
+              {[...new Set(possibleSolutions)].map((solution) => (
+                <li>{solution}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

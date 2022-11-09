@@ -2,10 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import { Grid } from "@mui/material";
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
-import { cleanText } from "./CleanText";
-import { SubmitBtn } from "./SubmitBtn";
-
-//props: Q, A, handleSubmit, header, topic, Blurb
+import { cleanText, SubmitBtn } from "./Common";
+import { AnswerBtn } from "./Common";
+//props: Q, A, handleSubmit, header, topic,
 
 //translate one sentence
 export const TranslateOne = (props) => {
@@ -15,7 +14,13 @@ export const TranslateOne = (props) => {
   const A = props.A.map((As) => cleanText(As));
   const handleSubmit = props.handleSubmit;
   const topic = props.topic;
-  const Blurb = props.Blurb;
+  const header = props.header;
+
+  useEffect(() => {
+    setCorrect('untested')
+    setInputField('')
+    setShowAnswer(false)
+  }, [props])
 
   const [correct, setCorrect] = useState("untested");
   const [inputField, setInputField] = useState("");
@@ -67,10 +72,16 @@ export const TranslateOne = (props) => {
 
   return (
     <div className="testComponent">
-      {Blurb && (
-        <>
+      {header == "default" ? (
+        <div style={{textAlign: 'left'}}>
           <h3>Translation</h3>
-          <p>Translate these sentences - from Gaelic to English or vice versa:</p>
+          <p>
+            Translate these sentences - from Gaelic to English or vice versa:
+          </p>
+        </div>
+      ) : (
+        <>
+          {header} <br />
         </>
       )}
 
@@ -98,11 +109,13 @@ export const TranslateOne = (props) => {
       </Grid>
 
 
-      {showAnswer && <h5>{props.A[0]}</h5>}
-      <Button onClick={() => setShowAnswer(!showAnswer)}>
-        {showAnswer ? "Hide" : "Show"} Answer
-      </Button>
-      
+      <AnswerBtn variant="contained" onClick={() => setShowAnswer(!showAnswer)}>
+        {!showAnswer ? "Show" : "Hide"} Answer
+      </AnswerBtn>
+
+      {showAnswer && <div className="answerBox">{props.A[0]}</div>}
+    
+
     </div>
   );
 };

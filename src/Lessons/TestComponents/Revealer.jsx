@@ -1,10 +1,20 @@
 import { useState } from "react";
 
-export const Revealer = ({ q, a }) => {
+export const Revealer = ({ q, a, header }) => {
   const [reveal, setReveal] = useState(false);
 
   return (
-    <div style={{ paddingBottom: "15px" }}>
+    <div>
+      {header == "default" ? (
+        <div style={{textAlign: 'left'}}>
+          <h3>Click to reveal</h3>
+        </div>
+      ) : (
+        <>
+          {header} <br />
+        </>
+      )}
+
       <center>
         <div
           style={{
@@ -21,8 +31,8 @@ export const Revealer = ({ q, a }) => {
             style={{
               backgroundColor: reveal ? "" : "#00842a",
               color: reveal ? "black" : "#00842a",
-              padding: '2px',
-              borderRadius: '5px',
+              padding: "2px",
+              borderRadius: "5px",
             }}
             onClick={() => setReveal((prev) => !prev)}
           >

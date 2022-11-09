@@ -4,6 +4,7 @@ import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { Button } from "@mui/material";
+import { AnswerBtn } from "./Common";
 
 //put sentence in order, optional prompt
 export const Dragger = ({
@@ -32,7 +33,11 @@ export const Dragger = ({
 
   useEffect(() => {
     shuffleOptions();
-  }, []);
+    setCorrect(false);
+    setShowAnswer(false);
+    setChosen([])
+  }, [sentence]);
+
 
   //ensure the shuffled version isn't not in the same order
   useEffect(() => {
@@ -98,7 +103,7 @@ export const Dragger = ({
     borderRadius: "20px",
     marginBottom: "2px",
     marginTop: "2px",
-    marginRight: '5px',
+    marginRight: "5px",
     // styles we need to apply on draggables
     ...draggableStyle,
   });
@@ -159,7 +164,15 @@ export const Dragger = ({
 
   return (
     <div className="testComponent">
-      {Blurb && <h3>Unscramble these sentences</h3>}
+      {header == "default" ? (
+        <div style={{ textAlign: "left" }}>
+          <h3>Unscramble these sentences</h3>
+        </div>
+      ) : (
+        <>
+          {header} <br />
+        </>
+      )}
 
       <div style={{ marginBottom: "10px", marginTop: "10px" }}>
         {prompt && (
@@ -263,11 +276,11 @@ export const Dragger = ({
         </DragDropContext>
       </div>
 
-      <Button onClick={() => setShowAnswer(!showAnswer)}>
-        {showAnswer ? "Hide" : "Show"} Answer
-      </Button>
+      <AnswerBtn variant="contained" onClick={() => setShowAnswer(!showAnswer)}>
+        {!showAnswer ? "Show" : "Hide"} Answer
+      </AnswerBtn>
 
-      {showAnswer && <h5>{sentence}</h5>}
+      {showAnswer && <div className="answerBox">{sentence}</div>}
     </div>
   );
 };
