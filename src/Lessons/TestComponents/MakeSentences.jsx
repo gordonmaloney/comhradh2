@@ -238,6 +238,8 @@ export const MakeSentences = ({ words, Length, header }) => {
         </ul>
       </div>
 
+      <br/><br/>
+
       <AnswerBtn variant="contained" onClick={() => setShowAnswer(!showAnswer)}>
         {!showAnswer ? "Show" : "Hide"} Answer
       </AnswerBtn>

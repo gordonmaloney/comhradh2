@@ -22,13 +22,8 @@ export const Words = [
       {
         gd: <>mi</>,
         en: <>I</>,
-        pro: (
-          <>
-            <br />
-            <br />
-          </>
-        ),
-        mne: <>Pronounced just like the English word ‘me’</>,
+        pro: <>Pronounced just like the English word ‘me’</>,
+        mne: <>You can surely remember this one!</>,
       },
       {
         gd: <>beag</>,
@@ -119,7 +114,8 @@ export const Words = [
             We have this same principle in English too - with words like{" "}
             <i>call</i> and <i>cell</i>. <br />
             <br />
-            If you want to practice with these sounds, <Link to="/chachi">you can play this game.</Link>
+            If you want to practice with these sounds,{" "}
+            <Link to="/chachi">you can play this game.</Link>
             <br />
             <br />
             The IPA for this one - if that’s your thing - is /ç/
@@ -129,6 +125,134 @@ export const Words = [
           <>
             Imagine you’ve gone all day desperate to get to the <i>toilet</i>,
             you’d be pretty <i>toilichte</i> when you finally made it!
+          </>
+        ),
+      },
+    ],
+  },
+  {
+    lesson: 2,
+    words: [
+      {
+        gd: <>chan eil</>,
+        en: <>is/am/are not</>,
+        pro: (
+          <>
+            When you have an <i>i</i>
+             or an <i>e</i>
+             after an <i>n</i>, even if it’s across two words like this, it gets
+            a kind of <i>y</i>
+             sound before it - so this is more like <i>chan yel</i>
+          </>
+        ),
+        mne: (
+          <>
+            It might not help you a ton right now, but the <i>chan</i>
+             here is how we negate most things - so you will get very used to
+            it.
+          </>
+        ),
+      },
+
+      {
+        gd: <>a bheil</>,
+        en: <>is/am/are…?</>,
+        pro: (
+          <>
+            The <i>bh</i>
+             here is like a <i>v</i>, so imagine saying the English phrase{" "}
+            <i>a veil</i>
+          </>
+        ),
+        mne: <></>,
+      },
+
+      {
+        gd: <>nach eil</>,
+        en: <>Isn’t/aren’t…?</>,
+        pro: <></>,
+        mne: (
+          <>
+            If <i>chan</i>
+             is a negative statement, you can remember that <i>nach</i>
+             is the question form because it’s like <i>chan</i>
+             backwards.
+          </>
+        ),
+      },
+
+      {
+        gd: <>e</>,
+        en: <>he</>,
+        pro: (
+          <>
+            Careful with this one - this is pronounced like <i>eh</i>,  not
+             like the name for the English letter <i>e</i>
+          </>
+        ),
+        mne: (
+          <>
+            Indulge me here - think of a moody teenage boy just replying to
+            everything with ‘eh…’
+          </>
+        ),
+      },
+
+      {
+        gd: <>Calum</>,
+        en: <>Calum</>,
+        pro: <></>,
+        mne: <>You surely do not need a mnemonic for this???</>,
+      },
+
+      {
+        gd: <>i</>,
+        en: <>she</>,
+        pro: (
+          <>
+            This is pronounced like <i>ee</i>, like in the word she
+          </>
+        ),
+        mne: <></>,
+      },
+
+      {
+        gd: <>Mòrag</>,
+        en: <>Morag</>,
+        pro: (
+          <>
+            Careful of two things here - the long <i>ò</i>, and the <i>g</i>
+             at the end, that’s pronounced more like the English <i>k</i>.
+          </>
+        ),
+        mne: <></>,
+      },
+
+      {
+        gd: <>fuar</>,
+        en: <>cold</>,
+        pro: <></>,
+        mne: (
+          <>
+            I always think this sounds like the sound you make when you’re
+            shivering - don’t know if that helps!
+          </>
+        ),
+      },
+
+      {
+        gd: <>blàth</>,
+        en: <>warm</>,
+        pro: (
+          <>
+            Long <i>a</i>, and the <i>th</i>
+             is silent - blaaah.
+          </>
+        ),
+        mne: (
+          <>
+            If someone’s speaking lots of <i>hot air</i>, you might say they’re
+            going <i>blah blah blah</i>
           </>
         ),
       },

@@ -276,6 +276,8 @@ export const Dragger = ({
         </DragDropContext>
       </div>
 
+
+<br/><br/>
       <AnswerBtn variant="contained" onClick={() => setShowAnswer(!showAnswer)}>
         {!showAnswer ? "Show" : "Hide"} Answer
       </AnswerBtn>

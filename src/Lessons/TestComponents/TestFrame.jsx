@@ -52,7 +52,7 @@ export const TestFrame = ({ questions }) => {
       </Box>
 
       <Grid
-        sx={{ width: "95%", mx: "auto" }}
+        sx={{ width: "95%", mx: "auto", mt: '15px' }}
         container
         justifyContent="space-between"
         alignItems="center"

@@ -97,6 +97,9 @@ export const FindMistake = ({ header, sentence, mistake, correct }) => {
         </>
       )}
 
+
+<br/><br/>
+
       <AnswerBtn variant="contained" onClick={() => setShowAnswer(!showAnswer)}>
         {!showAnswer ? "Show" : "Hide"} Answer
       </AnswerBtn>

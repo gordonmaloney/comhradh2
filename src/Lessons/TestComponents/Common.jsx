@@ -32,8 +32,6 @@ export const SubmitBtn = styled(Button)({
 });
 
 export const AnswerBtn = styled(Button)({
-  top: '20px',
-  marginBottom: '20px',
   backgroundColor: "#d1f0d9",
   borderRadius: "10px",
   padding: "5px 10px",

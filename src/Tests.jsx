@@ -36,12 +36,9 @@ export const Tests = () => {
             header={"default"}
             Length={4}
             words={[
-
               { word: "tha", pos: 0, length: 2 },
               { word: "chan", pos: 0 },
-
               { word: "eil", pos: 1 },
-
               { word: "mi", pos: 2 },
               { word: "thu", pos: 2 },
               { word: "sgìth", pos: 3 },

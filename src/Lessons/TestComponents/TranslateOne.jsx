@@ -17,10 +17,10 @@ export const TranslateOne = (props) => {
   const header = props.header;
 
   useEffect(() => {
-    setCorrect('untested')
-    setInputField('')
-    setShowAnswer(false)
-  }, [props])
+    setCorrect("untested");
+    setInputField("");
+    setShowAnswer(false);
+  }, [props]);
 
   const [correct, setCorrect] = useState("untested");
   const [inputField, setInputField] = useState("");
@@ -59,10 +59,8 @@ export const TranslateOne = (props) => {
 
   const handleChange = (e, Q, input) => {
     setInputField(input);
-    console.log(inputField);
+    A.includes(cleanText(input)) && handleCorrect();
   };
-
-  console.log(inputField);
 
   const handleSubmitCheck = () => {
     console.log(inputField);
@@ -73,7 +71,7 @@ export const TranslateOne = (props) => {
   return (
     <div className="testComponent">
       {header == "default" ? (
-        <div style={{textAlign: 'left'}}>
+        <div style={{ textAlign: "left" }}>
           <h3>Translation</h3>
           <p>
             Translate these sentences - from Gaelic to English or vice versa:
@@ -91,6 +89,7 @@ export const TranslateOne = (props) => {
         </Grid>
         <Grid item xs={6}>
           <TextField
+            inputProps={{ autoComplete: "off" }}
             disabled={correct == "true" && true}
             value={inputField}
             sx={{
@@ -108,14 +107,14 @@ export const TranslateOne = (props) => {
         </Grid>
       </Grid>
 
+      <br />
+      <br />
 
       <AnswerBtn variant="contained" onClick={() => setShowAnswer(!showAnswer)}>
         {!showAnswer ? "Show" : "Hide"} Answer
       </AnswerBtn>
 
       {showAnswer && <div className="answerBox">{props.A[0]}</div>}
-    
-
     </div>
   );
 };
