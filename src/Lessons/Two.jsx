@@ -10,193 +10,285 @@ import { TestFrame } from "./TestComponents/TestFrame";
 import { Button, Grid } from "@mui/material";
 import { AnswerBtn } from "./TestComponents/Common";
 import { useEffect } from "react";
+import { VerbGrid } from "./LessonComponents/VerbGrid";
+import { Selecter } from "./TestComponents/Selecter";
 
 export const Two = () => {
   const [step, setStep] = useState(0);
 
   useEffect(() => {
-    window.scrollTo(0,0)
-  }, [step])
+    window.scrollTo(0, 0);
+  }, [step]);
 
   const Steps = [
     //lesson
     <>
-      <h2 className="header">Lesson Two</h2>
+      <h2 className="header">Lesson Two: Denying and asking</h2>
       <p>
-        Let’s start by learning four words. You can expand them using the button
-        on the right to see tips for pronunciation and memorisation.
+        In the last lesson, we learned the word <em>tha</em>, and how it could
+        mean <em>am</em>, <em>are</em> or <em>is</em>. We also learned that it
+        always comes <em>before</em> the subject of the sentence, and that it
+        doesn&rsquo;t change form depending on what the subject is.
       </p>
-      <Vocab Lesson={1} filter={["tha", "mi", "beag", "mòr"]} />
       <p>
-        But before we can make a sentence with them, we need to understand that
-        the order that words go in when you’re speaking Gaelic is a little
-        different from English.
+        It <em>does</em>, though, change form to become negative or to become a
+        question.
       </p>
-      <Example explainer={"In English, you would say:"} text={"I am big"} />
-      <Example
-        explainer={"But in Gaelic, that sentence would be:"}
-        text={"Tha mi mòr"}
-      />
-      <Example
-        explainer={
-          "But the literal, word-for-word translation of this would be:"
-        }
-        text={"am I big"}
-      />
       <p>
-        From time to time, we'll show you these kinds of literal, word-for-word
-        translation of the Gaelic, to help you understand what's happening. For
-        this sentence, that would look like:
+        The negative form of <em>tha</em> is <em>chan eil</em>. Just like{" "}
+        <em>tha</em>, though, this always comes at the start of a sentence and
+        doesn&rsquo;t change depending on the subject, so you could translate it
+        as <em>am not</em>, <em>are not</em> and <em>is not</em>.
       </p>
-      <WordForWord en={"I am big"} gd={"Tha mi mòr"} lit={"am I big"} />
-      <p>
-        As you can see, in Gaelic the verb comes <i>before</i> the subject. This
-        will take some time to get used to, but the good news is that this
-        sentence construction is consistent throughout Gaelic. It’ll be second
-        nature before you know it.{" "}
-      </p>
-      <Example explainer={"So if:"} text={"Tha mi mòr"} />
-      <Example explainer={"Means:"} text={"I am big"} />
-      <p>
-        And <i>beag</i> means <i>small</i>, can you work out the Gaelic for
-        this?
-      </p>
-      <Revealer q="I am small" a="Tha mi beag" />
-      <p>
-        This is really easy in Gaelic - you simply replace the adjective with
-        another one, and everything else stays the same. The adjective also
-        doesn’t change its form in sentences like this, so it really is just a
-        matter of slotting it in.
-      </p>
-      <p>Let’s now learn a couple more words:</p>
-      <Vocab Lesson={1} filter={["thu", "sgìth", "brònach", "toilicthe"]} />
+
       <Example
         explainer={
-          "In English, as well as many other languages, verbs sometimes change their form depending on who or what they are attached to. So we have:"
+          "This means that we can make an ‘affirmative’ sentence like:"
         }
         text={
           <>
-            I <i>am</i>
+            <u>Tha</u> mi beag
+            <br />I <u>am</u> small
           </>
         }
       />
+
       <Example
-        explainer={"But:"}
+        explainer={
+          <>
+            ...into a ‘negative’ one by just swapping out <em>tha</em> for{" "}
+            <em>chan eil</em>:
+          </>
+        }
         text={
           <>
-            You <i>are</i>
+            <u>Chan eil</u> mi beag
+            <br />I <u>am not</u> small
           </>
         }
       />
+
       <p>
-        In Gaelic, however, verbs are much simpler and stay the same no matter
-        who or what they refer to. That means that you can use the word tha to
-        describe anyone or anything. All you have to do is replace the{" "}
-        <i>subject</i> (the person or thing being described, the mi in our first
-        examples) with a different one:
+        But before we practice that, let’s also learn how to make the question
+        (the ‘interrogative’ forms). In Gaelic, there is both an ‘affirmative’
+        and a ‘negative’ question form:
       </p>
-      <Example
-        text={
-          <span style={{ fontWeight: "400" }}>
-            Tha mi mòr
-            <br />
-            Tha <s>mi</s> mòr
-            <br />
-            Tha thu mòr
-          </span>
-        }
-      />
+
+      <Vocab Lesson={2} filter={["a bheil", "nach eil"]} />
+
       <p>
-        Like we saw earlier with the adjectives for sentences like this you can
-        simply slot a different subject in and out and everything else stays the
-        same.
+        But just like with <em>tha</em> and <em>chan eil</em>, everything else
+        in the sentence stays the same - you simply swap out the{" "}
+        <em>statement</em> form (<em>tha</em> or <em>chan eil</em>) with the{" "}
+        <em>question </em>form (<em>a bheil</em> or <em>nach eil</em>).
       </p>
       <p>
-        That means <i>tha</i> could be translated as <i>am</i>, <i>are</i>, or
-        even <i>is</i> depending on context. Much easier than English!
+        Let&rsquo;s see some examples, and see if you can guess what they mean:
       </p>
+
+      <Revealer q="A bheil thu beag?" a="Are you small?" />
+      <Revealer q="Nach eil mi sgìth?" a="Aren't I tired?" />
+      <Revealer q="A bheil mi mòr?" a="Am I big?" />
+      <Revealer q="Nach eil thu brònach?" a="Aren't you sad?" />
+
+      <p>
+        Most verbs in Gaelic work in a similar way to this (though you’ll be
+        pleased to know that most others are much, much more regular!), and we
+        can represent them in a chart like this:
+      </p>
+
+      <VerbGrid words={["tha", "chan eil", "a bheil?", "nach eil?"]} />
+
+      <p>
+        And to finish this lesson, we’re going to learn a couple new words that
+        can be the subjects of sentences:
+      </p>
+
+      <Vocab Lesson={2} filter={["e", "i", "Calum", "Mòrag"]} />
+
+      <p>
+        Just like with <em>mi</em> and <em>thu</em>, you can swap out the
+        subject of a sentence for <em>e</em> or <em>i</em>, or pretty much any
+        other noun - like someone&rsquo;s name - and the rest of the sentence
+        stays the same.
+      </p>
+      <p>
+        We&rsquo;ll practice all of that in a moment, but first let&rsquo;s
+        learn just two more adjectives:
+      </p>
+
+      <Vocab Lesson={2} filter={["blàth", "fuar"]} />
+
+      <p>
+        And here they are in some sentences - see if you can understand them:
+      </p>
+
+      <Revealer q="Chan eil e blàth" a="He isn't warm" />
+      <Revealer q="A bheil i fuar?" a="Is she cold?" />
+      <Revealer q="Tha Calum blàth" a="Calum is warm" />
+      <Revealer q="Nach eil Mòrag fuar?" a="Isn't Morag cold?" />
     </>,
     //recap and vocab
     <>
       <h2 className="header">Recap</h2>
       <ul>
         <li>
-          The word-order in Gaelic is different to English, and for the
-          sentences we’ve looked at here goes <i>verb-subject-adjective</i> (as
-          opposed to English, which is <i>subject-verb-adjective</i>)
+          The full forms of tha for both positive and negative, and statement
+          and question, looks like this:
+          <VerbGrid words={["tha", "chan eil", "a bheil?", "nach eil?"]} />
         </li>
         <li>
-          The verb <i>tha</i> doesn’t change depending on the person or thing
-          that the sentence is about
+          Just like with <i>tha</i>, the forms stay the same no matter what the
+          subject is
+        </li>
+        <li>
+          All subjects - whether they are pronouns, names, or other nouns - work
+          the same, and don’t change the other words in the sentence or the word
+          order
         </li>
       </ul>
       <br />
       <h2 className="header">Vocab</h2>
-      <Vocab Lesson={1} />
+      <Vocab Lesson={2} />
     </>,
     //test
     <>
       <h2 className="header">Test your skills</h2>
+
       <TestFrame
         questions={[
-          <MakeSentences
-            header="default"
-            Length={3}
-            words={[
-              { word: "tha", pos: 0 },
-              { word: "tha", pos: 0 },
-              { word: "tha", pos: 0 },
-              { word: "tha", pos: 0 },
-              { word: "tha", pos: 0 },
-              { word: "mi", pos: 1 },
-              { word: "mi", pos: 1 },
-              { word: "thu", pos: 1 },
-              { word: "thu", pos: 1 },
-              { word: "thu", pos: 1 },
-              { word: "beag", pos: 2 },
-              { word: "mòr", pos: 2 },
-              { word: "sgìth", pos: 2 },
-              { word: "brònach", pos: 2 },
-              { word: "toilichte", pos: 2 },
-            ]}
-          />,
-          <Dragger header="default" sentence="tha thu brònach" />,
-          <Dragger header="default" sentence="tha thu mòr" />,
-          <Dragger header="default" sentence="tha thu beag" />,
-          <Dragger header="default" sentence="tha mi toilichte" />,
-          <Dragger header="default" sentence="tha thu sgìth" />,
-          <Dragger header="default" sentence="tha mi mòr" />,
-
           <TranslateOne
-            header="default"
-            A={["You are happy", "You're happy"]}
-            Q={"Tha thu toilichte"}
+            header="Flip this sentence from positive to negative or vice versa:"
+            A={["Tha i toilichte"]}
+            Q={"Chan eil i toilichte"}
           />,
-
           <TranslateOne
-            header="default"
-            A={["I am tired", "I'm tired"]}
+            header="Flip this sentence from positive to negative or vice versa:"
+            A={["Chan eil mi sgìth"]}
             Q={"Tha mi sgìth"}
           />,
           <TranslateOne
+            header="Flip this sentence from positive to negative or vice versa:"
+            A={["Nach eil Mòrag blàth?"]}
+            Q={"A bheil Mòrag blàth?"}
+          />,
+          <TranslateOne
+            header="Flip this sentence from positive to negative or vice versa:"
+            A={["A bheil thu brònach?"]}
+            Q={"Nach eil thu brònach?"}
+          />,
+
+          <TranslateOne
+            header="Flip this sentence from a statement to a question or vice versa:"
+            A={["Tha Calum beag."]}
+            Q={"A bheil Calum beag?"}
+          />,
+          <TranslateOne
+            header="Flip this sentence from a statement to a question or vice versa:"
+            A={["Chan eil i mòr."]}
+            Q={"Nach eil i mòr?"}
+          />,
+          <TranslateOne
+            header="Flip this sentence from a statement to a question or vice versa:"
+            A={["A bheil a fuar?"]}
+            Q={"Tha e fuar."}
+          />,
+          <TranslateOne
+            header="Flip this sentence from a statement to a question or vice versa:"
+            A={["Nach eil Mòrag sgìth?"]}
+            Q={"Chan eil Mòrag sgìth."}
+          />,
+
+          <Selecter
+            header="Add the correct punctuation to the following sentences - a question mark for question, and a full stop for statements:"
+            text={"Chan eil mi brònach"}
+            options={[".", "?"]}
+            correct="."
+          />,
+
+          <Selecter
+            header="Add the correct punctuation to the following sentences - a question mark for question, and a full stop for statements:"
+            text={"A bheil thu sgìth"}
+            options={[".", "?"]}
+            correct="?"
+          />,
+
+          <Selecter
+            header="Add the correct punctuation to the following sentences - a question mark for question, and a full stop for statements:"
+            text={"Nach eil e mòr"}
+            options={[".", "?"]}
+            correct="?"
+          />,
+
+          <Selecter
+            header="Add the correct punctuation to the following sentences - a question mark for question, and a full stop for statements:"
+            text={"Tha i beag"}
+            options={[".", "?"]}
+            correct="."
+          />,
+          <Selecter
+            header="Add the correct punctuation to the following sentences - a question mark for question, and a full stop for statements:"
+            text={"A bheil i blàth"}
+            options={[".", "?"]}
+            correct="?"
+          />,
+          <Selecter
+            header="Add the correct punctuation to the following sentences - a question mark for question, and a full stop for statements:"
+            text={"Tha thu toilichte"}
+            options={[".", "?"]}
+            correct="."
+          />,
+          <Selecter
+            header="Add the correct punctuation to the following sentences - a question mark for question, and a full stop for statements:"
+            text={"Chan eil Mòrag fuar"}
+            options={[".", "?"]}
+            correct="."
+          />,
+
+          <TranslateOne
             header="default"
-            A={["You are big", "You're big"]}
-            Q={"Tha thu mòr"}
+            A={["A bheil thu beag?"]}
+            Q={"Are you small?"}
           />,
           <TranslateOne
             header="default"
-            A={["Tha mi beag"]}
-            Q={"I am small"}
+            A={["Nach eil mi fuar?"]}
+            Q={"Am I not cold?"}
           />,
           <TranslateOne
             header="default"
-            A={["Tha thu brònach"]}
-            Q={"You are sad"}
+            A={["A bheil i sgìth?"]}
+            Q={"Is she tired?"}
           />,
           <TranslateOne
             header="default"
-            A={["Tha thu sgìth"]}
-            Q={"You are tired"}
+            A={["Chan eil mi mòr"]}
+            Q={"I am not big."}
+          />,
+          <TranslateOne
+            header="default"
+            A={["Tha e fuar"]}
+            Q={"He is cold."}
+          />,
+          <TranslateOne
+            header="default"
+            A={["Nach eil e fuar?"]}
+            Q={"Isn't he cold?"}
+          />,
+          <TranslateOne
+            header="default"
+            A={["A bheil thu beag?"]}
+            Q={"Are you small?"}
+          />,
+          <TranslateOne
+            header="default"
+            A={["Tha Mòrag brònach"]}
+            Q={"Morag is sad."}
+          />,
+          <TranslateOne
+            header="default"
+            A={["Chan eil Calum toilichte"]}
+            Q={"Calum is not happy."}
           />,
         ]}
       />

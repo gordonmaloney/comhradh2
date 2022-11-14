@@ -78,9 +78,9 @@ export const TranslateOne = (props) => {
           </p>
         </div>
       ) : (
-        <>
-          {header} <br />
-        </>
+        <div style={{ textAlign: "left" }}>
+          <p>{header}</p>
+        </div>
       )}
 
       <Grid container justifyContent="center" alignItems="center">
